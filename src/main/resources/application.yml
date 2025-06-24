@@ -1,7 +1,7 @@
 server:
   port: 8081
 jwt:
-  secret: univalle-clave-secreta
+  secret: univalleClaveSecreta
   
   
 spring:
