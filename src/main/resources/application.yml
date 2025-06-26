@@ -1,7 +1,6 @@
 server:
-  port: 8081
-jwt:
-  secret: univalle-clave-secreta
+  port: 8080
+JWT_SECRET_KEY: univalleclavesecreta123456789012345678901234567890123456789
   
   
 spring:
@@ -11,36 +10,48 @@ spring:
     name: api-gateway
   cloud:
     gateway:
-      routes:
-        - id: Auth
-          uri: lb://AUTH
-          predicates:
-            - Path=/api/auth/**
-          filters:
-            - StripPrefix=1
-        - id: Subasta
-          uri: lb://SUBASTA
-          predicates:
-            - Path=/api/subasta/**
-          filters:
-            - StripPrefix=1
-        - id: oferta-service
-          uri: lb://OFERTA
-          predicates:
-            - Path=/api/ofertas/**
-          filters:
-            - StripPrefix=1
-        - id: pedido-service
-          uri: lb://PEDIDORASTREO
-          predicates:
-            - Path=/api/pedidos/**
-          filters:
-            - StripPrefix=1
-        - id: chat-service
-          uri: lb://MICROSERVICIO-CHAT
-          predicates:
-            - Path=/api/chat/**
+      server:
+        webflux:
+          routes:
+            - id: Auth
+              uri: lb://AUTH 
+              predicates:
+                - Path=/api/auth/**
+              filters:
+                - StripPrefix=1
+            - id: Subasta
+              uri: lb://Subasta
+              predicates:
+                - Path=/api/subasta/**
+            - id: oferta-service
+              uri: lb://oferta
+              predicates:
+                - Path=/api/ofertas/**
+            - id: pedido-service
+              uri: lb://PedidoRastreo
+              predicates:
+                - Path=/api/pedidos/**
+            - id: chat-service
+              uri: lb://Microservicio-Chat
+              predicates:
+                - Path=/api/chat/**
+            - id: monitoreo-service
+              uri: lb://MONITOREO
+              predicates:
+                - Path=/api/monitoreo/**
+            - id: metrics-service
+              uri: lb://MONITOREO
+              predicates:
+                - Path=/api/metrics/**
+              filters:
+                - StripPrefix=1
+            - id: test-service
+              uri: lb://MONITOREO
+              predicates:
+                - Path=/api/test/**
+              filters:
+                - StripPrefix=1
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-server:8761/eureka
