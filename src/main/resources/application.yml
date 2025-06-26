@@ -1,6 +1,12 @@
 server:
+<<<<<<< HEAD
   port: 8080
 JWT_SECRET_KEY: univalleclavesecreta123456789012345678901234567890123456789
+=======
+  port: 8081
+jwt:
+  secret: univalleClaveSecreta
+>>>>>>> d8208340c1d1ab84d0c923e1f1115bbbba4a14a4
   
   
 spring:
